@@ -2,7 +2,8 @@
 
 A responsive, high-performance Trip Discovery Web Application built for the Buddy In Hills Frontend Developer Internship assessment.
 
-**Live Demo:** [Insert Your Vercel/Netlify Link Here]
+* **Live Demo:** [https://trip-discovery.vercel.app/](https://trip-discovery.vercel.app/)
+* **GitHub Repository:** [https://github.com/shivang-meena/trip-discovery](https://github.com/shivang-meena/trip-discovery)
 
 ---
 
@@ -12,7 +13,7 @@ To run this project locally on your machine, follow these steps:
 
 1. **Clone the repository:**
    ```bash
-   git clone [Insert Your GitHub Repo Link Here]
+   git clone [https://github.com/shivang-meena/trip-discovery.git](https://github.com/shivang-meena/trip-discovery.git)
    cd trip-discovery
 Install dependencies:
 
@@ -26,7 +27,7 @@ Open in Browser:
 Navigate to http://localhost:5173 in your web browser.
 
 Folder Structure
-The application is structured to ensure clear separation of concerns, scalability, and modularity:
+The application is modular and component-driven to ensure clean architecture and readability:
 
 Plaintext
 trip-discovery/
@@ -58,38 +59,35 @@ Routing: React Router DOM
 
 Styling: Tailwind CSS (v3)
 
-Data Fetching: Native Fetch API (No external libraries like Axios used)
+Data Fetching: Native Fetch API (No Axios or external libraries)
 
 State Management: React Hooks (useState, useEffect) & localStorage
 
 Assumptions Made
 API Data Mapping: The dummyjson product data fields were mapped to fit a travel context (e.g., treating a product as a travel package, utilizing the thumbnail and images for destination visuals).
 
-Category Limits: The API returns many categories; for UI cleanliness, I sliced the initial category array to display the first 10 relevant categories.
+Category UI Density: The API returns a large volume of categories. For a cleaner mobile-friendly UI, the category array is sliced to display a manageable subset on the home screen.
 
-Wishlist Scope: The wishlist feature is intended for individual user sessions, thus localStorage is sufficient for persistence without requiring a backend database.
+Wishlist Persistence: The wishlist feature is intended for individual user sessions, making localStorage the optimal choice for persistence without requiring backend database integration.
 
 Challenges Faced
-API Filtering Limitations: The provided DummyJSON API does not support simultaneous endpoints for searching text and filtering by category (e.g., searching for "Gucci" exclusively within the "Fragrances" category).
+API Filtering Limitations:
 
-Solution: I implemented robust client-side filtering. When both states are active, the app fetches the search results and then utilizes standard JavaScript .filter() methods to narrow the array down to the selected category locally, preventing UI resets and providing a seamless user experience.
+Challenge: The provided DummyJSON API does not support simultaneous endpoints for searching text and filtering by category (e.g., searching for a specific keyword exclusively within a selected category).
 
-Vite & Tailwind CSS v4 Conflict: During initial setup, the newly released Tailwind CSS v4 caused plugin resolution errors within Vite's caching system.
+Solution: I implemented a robust client-side filtering system. When both states are active, the application fetches the search results from the API and then utilizes standard JavaScript .filter() methods to narrow the array down to the selected category locally. This prevents UI resets and provides a seamless user experience.
 
-Solution: To ensure stability and meet the tight deadline, I successfully rolled the configuration back to a highly stable Tailwind v3 environment, allowing the custom Dark Mode and UI classes to compile perfectly.
+Vite & Tailwind CSS v4 Conflict:
+
+Challenge: During the initial build phase, the newly released Tailwind CSS v4 caused plugin resolution errors within Vite's caching system, breaking the dark mode utility classes.
+
+Solution: To ensure stability, clean code, and meet the tight deadline, I successfully rolled the configuration back to a highly stable Tailwind v3 environment.
 
 Future Improvements
-If given more time beyond the assessment deadline, I would implement the following features:
+If given more time beyond the assessment deadline, I would implement the following optimizations:
 
-Infinite Scrolling: Replace the manual "Load More" button with an IntersectionObserver to automatically fetch the next paginated batch of trips when the user reaches the bottom of the screen.
+Infinite Scrolling: Replace the manual "Load More" pagination button with an IntersectionObserver to automatically fetch the next batch of trips when the user reaches the bottom of the grid.
 
-Unit Testing: Implement Vitest and React Testing Library to ensure the custom useDebounce hook and client-side filtering logic remain completely bug-free as the app scales.
+Unit Testing: Integrate Vitest and React Testing Library to ensure the custom useDebounce hook and client-side filtering logic remain strictly bug-free as the application scales.
 
-Advanced Animations: Use Framer Motion to add highly fluid page transitions between the Home route and the Trip Details route.
-
-
-***
-
-**Crucial reminder:** Do not forget to replace `[Insert Your Vercel/Netlify Link Here]` and `[Insert Your GitHub Repo Link Here]` with your actual links before committing this file!
-
-Are you ready to draft the final submission email to send to Ojaswa, or do you need help deploying it to
+Framer Motion Animations: Implement highly fluid, physics-based page transitions between the Home layout and the Trip Details route to create a native app-like experience.
