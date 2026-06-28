@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { fetchTrips, searchTrips, fetchTripsByCategory } from '../api';
-import type { Trip } from '../types';
+import type { Trip, ApiResponse } from '../types';
 import { useDebounce } from '../hooks/useDebounce';
 import TripCard from '../components/TripCard';
 import SkeletonCard from '../components/SkeletonCard';
@@ -27,7 +27,7 @@ export default function Home() {
         setLoading(true);
         setError(null);
         
-        let data;
+       let data: ApiResponse;
         
         // SCENARIO 1: Both Search AND Category are active
         // The API can't handle both, so we fetch by search and filter in the browser!

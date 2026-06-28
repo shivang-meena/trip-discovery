@@ -1,75 +1,95 @@
-# React + TypeScript + Vite
+# Buddy In Hills - Trip Discovery Web Application
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A responsive, high-performance Trip Discovery Web Application built for the Buddy In Hills Frontend Developer Internship assessment.
 
-Currently, two official plugins are available:
+**Live Demo:** [Insert Your Vercel/Netlify Link Here]
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+---
 
-## React Compiler
+## Setup Instructions
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+To run this project locally on your machine, follow these steps:
 
-## Expanding the ESLint configuration
+1. **Clone the repository:**
+   ```bash
+   git clone [Insert Your GitHub Repo Link Here]
+   cd trip-discovery
+Install dependencies:
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+Bash
+npm install
+Start the development server:
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+Bash
+npm run dev
+Open in Browser:
+Navigate to http://localhost:5173 in your web browser.
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+Folder Structure
+The application is structured to ensure clear separation of concerns, scalability, and modularity:
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+Plaintext
+trip-discovery/
+├── src/
+│   ├── api/
+│   │   └── index.ts               # Centralized native fetch() API calls
+│   ├── components/
+│   │   ├── CategoryFilter.tsx     # Horizontal category selection UI
+│   │   ├── Navbar.tsx             # Main navigation, search, and theme toggle
+│   │   ├── SkeletonCard.tsx       # Loading state UI for trip cards
+│   │   ├── TripCard.tsx           # Reusable individual trip component
+│   │   └── WishlistDrawer.tsx     # Slide-out sidebar for local storage favorites
+│   ├── hooks/
+│   │   └── useDebounce.ts         # Custom hook for optimizing search API calls
+│   ├── pages/
+│   │   ├── Home.tsx               # Main dashboard with pagination and data grid
+│   │   └── TripDetails.tsx        # Dynamic route for single trip details
+│   ├── types/
+│   │   └── index.ts               # Strict TypeScript basic `type` aliases
+│   ├── App.tsx                    # React Router configuration
+│   ├── index.css                  # Global styles and Tailwind directives
+│   └── main.tsx                   # React DOM entry point
+Technologies Used
+Frontend Framework: React.js (Vite)
 
-```
+Language: TypeScript (Strictly utilizing basic type aliases)
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+Routing: React Router DOM
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+Styling: Tailwind CSS (v3)
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+Data Fetching: Native Fetch API (No external libraries like Axios used)
 
-```
+State Management: React Hooks (useState, useEffect) & localStorage
+
+Assumptions Made
+API Data Mapping: The dummyjson product data fields were mapped to fit a travel context (e.g., treating a product as a travel package, utilizing the thumbnail and images for destination visuals).
+
+Category Limits: The API returns many categories; for UI cleanliness, I sliced the initial category array to display the first 10 relevant categories.
+
+Wishlist Scope: The wishlist feature is intended for individual user sessions, thus localStorage is sufficient for persistence without requiring a backend database.
+
+Challenges Faced
+API Filtering Limitations: The provided DummyJSON API does not support simultaneous endpoints for searching text and filtering by category (e.g., searching for "Gucci" exclusively within the "Fragrances" category).
+
+Solution: I implemented robust client-side filtering. When both states are active, the app fetches the search results and then utilizes standard JavaScript .filter() methods to narrow the array down to the selected category locally, preventing UI resets and providing a seamless user experience.
+
+Vite & Tailwind CSS v4 Conflict: During initial setup, the newly released Tailwind CSS v4 caused plugin resolution errors within Vite's caching system.
+
+Solution: To ensure stability and meet the tight deadline, I successfully rolled the configuration back to a highly stable Tailwind v3 environment, allowing the custom Dark Mode and UI classes to compile perfectly.
+
+Future Improvements
+If given more time beyond the assessment deadline, I would implement the following features:
+
+Infinite Scrolling: Replace the manual "Load More" button with an IntersectionObserver to automatically fetch the next paginated batch of trips when the user reaches the bottom of the screen.
+
+Unit Testing: Implement Vitest and React Testing Library to ensure the custom useDebounce hook and client-side filtering logic remain completely bug-free as the app scales.
+
+Advanced Animations: Use Framer Motion to add highly fluid page transitions between the Home route and the Trip Details route.
+
+
+***
+
+**Crucial reminder:** Do not forget to replace `[Insert Your Vercel/Netlify Link Here]` and `[Insert Your GitHub Repo Link Here]` with your actual links before committing this file!
+
+Are you ready to draft the final submission email to send to Ojaswa, or do you need help deploying it to
